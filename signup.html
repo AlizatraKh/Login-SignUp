@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignUp</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- HTML layout untuk halaman sign up -->
+
+  <div class="container">
+    <div class="card">
+     <img src="https://cdn.discordapp.com/attachments/1198078034817855639/1202910392053927946/20240202_163616.png?ex=65cf2c9a&is=65bcb79a&hm=b46d26f7d55f83cc1505b5a08399a00da4a09854c8d20ce7ec767185a1c22c18&" style="width: 40%; padding-left: 100px 300px;"/> <h2>ចុះឈ្មោះដើម្បីចូលទៅប្រើប្រាស់គណនី</h2>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="username">ឈ្មោះអ្នកប្រើ:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">ពាក្យសម្ងាត់:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+                <div class="form-group">
+          <label for="password">បញ្ជាក់ពាក្យសម្ងាត់:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">ចុះ​ឈ្មោះ</button>
+        <div class="privacy">
+      <input type="checkbox">
+         <span>ចងចាំខ្ញុំ!</span>
+    </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript untuk menangani sign up dan menampilkan toast -->
+  <script>
+    const signupForm = document.getElementById('signup-form');
+    signupForm.addEventListener('submit', handleSignup);
+
+    function handleSignup(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Cek apakah username sudah ada di penyimpanan lokal
+      if (isUsernameExists(username)) {
+        showToast('Username Successful');
+      } else {
+        // Simpan informasi akun ke penyimpanan lokal (local storage)
+        saveAccount(username, password);
+        showToast('ការចុះឈ្មោះទទួលបានជោគជ័យអបអសាទរ');
+
+        // Setelah proses sign up berhasil, arahkan pengguna ke halaman login
+        window.location.href = 'login.html';
+
+      }
+    }
+
+    function isUsernameExists(username) {
+      // Cek apakah username sudah ada di penyimpanan lokal (local storage)
+      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+      return accounts.some(account => account.username === username);
+    }
+
+    function saveAccount(username, password) {
+      // Dapatkan data akun yang ada di penyimpanan lokal
+      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+
+      // Tambahkan akun baru ke array
+      accounts.push({ username, password });
+
+      // Simpan kembali data akun ke penyimpanan lokal
+      localStorage.setItem('accounts', JSON.stringify(accounts));
+    }
+
+    function showToast(message) {
+      // Tampilkan toast dengan pesan yang diberikan
+      // Implementasi khusus untuk menampilkan toast dapat bervariasi tergantung pada framework atau library yang digunakan
+      // Di sini, kita akan menggunakan fungsi alert() sebagai contoh sederhana
+      alert(message);
+    }
+  </script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

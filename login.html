@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+           <img src="https://cdn.discordapp.com/attachments/1198078034817855639/1202910392053927946/20240202_163616.png?ex=65cf2c9a&is=65bcb79a&hm=b46d26f7d55f83cc1505b5a08399a00da4a09854c8d20ce7ec767185a1c22c18&" style="width: 30%; padding-left: 100px 300px;"/>
+      <h2>បំពេញឈ្មោះដើម្បីចូលទៅកាន់គណនី</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">ឈ្មោះអ្នកប្រើ:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">ពាក្យសម្ងាត់:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">ចូល</button>
+         <div class="privacy-2">
+      <input type="checkbox">
+      <span>ខ្ញុំបានអាន និងទទួលយកគោលការណ៍ឯកជនភាព</span>
+    </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript untuk menangani login dan menampilkan toast -->
+  <script>
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', handleLogin);
+
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Cek apakah username dan password cocok dengan data yang ada di penyimpanan lokal
+      if (checkCredentials(username, password)) {
+        showToast('ការចុះឈ្មោះទទួលបានជោគជ័យ!');
+        window.location.href = 'beranda.html'; // Pindah ke halaman beranda setelah login berhasil
+      } else {
+        showToast('ឈ្មោះនឹងពាក្យសម្ងាត់របស់អ្នកមិនត្រឹមត្រូវទេ!');
+      }
+    }
+
+    function checkCredentials(username, password) {
+      // Dapatkan data akun yang ada di penyimpanan lokal
+      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+
+      // Periksa apakah username dan password cocok dengan data yang ada di penyimpanan lokal
+      return accounts.some(account => account.username === username && account.password === password);
+    }
+
+    function showToast(message) {
+      // Tampilkan toast dengan pesan yang diberikan
+      // Implementasi khusus untuk menampilkan toast dapat bervariasi tergantung pada framework atau library yang digunakan
+      // Di sini, kita akan menggunakan fungsi alert() sebagai contoh sederhana
+      alert(message);
+    }
+  </script>
+  <script>
+  const email = document.getElementById("email");
+const password = document.getElementById("password");
+const login = document.getElementById("login");
+
+login.onclick = function() {
+  swal ({
+    title: "You've Successfully Logged In",
+    icon: "success",
+    button: "OK"
+  })
+}
+</script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
